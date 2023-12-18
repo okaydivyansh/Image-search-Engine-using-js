@@ -11,7 +11,11 @@ async function searchImages()
     const url=`https://api.unsplash.com/search/photos?page=${page}&query=${keyword}&client_id=${key}&per_page=12`;
     const response= await fetch(url);
     const data=await response.json();
-    console.log(data);
+    // console.log(data);
+    if(page==1)
+    {
+        searchResult.innerHTML="";
+    }
     const results=data.results;
     results.map((result)=>
     {
@@ -33,5 +37,6 @@ searchForm.addEventListener("submit",(e)=>{
 searchMoreBtn.addEventListener("click",()=>
     {
         page++;
+        searchImages();
     }
 )
